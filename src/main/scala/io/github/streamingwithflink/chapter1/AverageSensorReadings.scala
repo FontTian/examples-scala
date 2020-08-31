@@ -30,11 +30,15 @@ object AverageSensorReadings {
   /** main() defines and executes the DataStream program */
   def main(args: Array[String]) {
 
-    // set up the streaming execution environment
+    // set up the local streaming execution environment
     val env = StreamExecutionEnvironment.getExecutionEnvironment
+
+    // Set up remote stream execution environment
+    // val env = StreamExecutionEnvironment.createRemoteEnvironment("host",9703,"path/to/jarFile.jar")
 
     // use event time for the application
     env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime)
+
     // configure watermark interval
     env.getConfig.setAutoWatermarkInterval(1000L)
 
